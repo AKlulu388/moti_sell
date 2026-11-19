@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>母题库工作台 · 题型与解法大招</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/katex.css">
+</head>
+<body>
+
+<div id="trialLock">
+  <div class="tcard">
+    <h2 id="trialTitle">3天试用已结束</h2>
+    <p class="hint">感谢试用！输入激活码解锁正式版：永久使用、不再限时，学习数据全部保留。</p>
+    <div class="mebar"><b>本机设备码</b><span class="sp"></span><span id="trialDev">-</span></div>
+    <p class="hint">把设备码发给作者获取激活码。设备码与本机绑定：卸载重装、清除数据后不变，输入原激活码即可恢复正式版。</p>
+    <p class="hint" style="margin:10px 0 4px"><b>联系作者获取最新激活码</b></p>
+    <div class="qrbox"><img id="lockQr" alt="作者微信二维码" src="data:image/png;base64,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"><div class="qrtip"><p class="hint"><b>微信扫码添加作者</b></p><button class="btn sm" id="btnLockQrSave">保存二维码到相册</button><p class="hint">保存后：微信→扫一扫→右上角相册→选此图</p></div></div>
+    <div class="mebar"><b>QQ</b><span class="sp"></span><span id="lockQq"></span><button class="btn sm" id="btnLockQq" style="margin-left:8px">复制</button></div>
+    <div class="actbar" style="margin-top:10px"><div class="field" style="flex:1 1 160px"><input id="trialCode" placeholder="输入激活码"></div><button class="btn sm pri" id="btnTrialAct">激活正式版</button></div>
+    <p class="hint" id="trialErr" style="color:#b91c1c"></p>
+  </div>
+</div>
+
+<header class="appbar">
+  <div class="brand">
+    <div class="mark">母</div>
+    <div class="brand"><b>母题库工作台</b><small>DeepSeek 审知识点 · 本地配母题 · v2.15.0</small></div>
+  </div>
+  <span class="pillcount" id="hdrCount">0 母题</span>
+</header>
+
+<main class="main" id="mainScroll">
+
+  <!-- 题库 -->
+  <section class="view on" id="view-bank">
+    <div class="hero">
+      <div class="stat3">
+        <div class="s3"><b id="stTypes">0</b><i>母题题型</i></div>
+        <div class="s3 g"><b id="stMoves">0</b><i>解法大招</i></div>
+        <div class="s3"><b id="stSamples">0</b><i>学习样本</i></div>
+      </div>
+      <div class="searchrow">
+        <div class="field"><input id="q" type="search" placeholder="搜题型 / 大招 / 关键词" autocomplete="off"></div>
+      </div>
+      <div class="tagrow" id="subjFilter"></div>
+      <div class="tagrow" id="subjectFilter"></div>
+    </div>
+    <div class="layout">
+      <aside class="card side" id="side">
+        <div class="card-h"><h2>母题分类</h2><span class="sub" id="catCount"></span></div>
+        <div class="list catcol" id="catList"></div>
+      </aside>
+      <section class="card" id="listCard" style="min-width:0">
+        <div class="card-h"><h2>题型列表</h2><span class="sub" id="listCount"></span></div>
+        <div class="list" id="typeList"></div>
+      </section>
+      <section class="card detailcol" id="detailCol" style="min-width:0">
+        <div class="card-h"><h2>母题详情</h2><span class="spacer"></span><button class="btn sm ghost" id="btnDockClose">✕</button></div>
+        <div id="detailDock"><div class="empty">点击左侧题型，在此查看解法详情</div></div>
+      </section>
+    </div>
+  </section>
+
+  <!-- 识题（v14 找同解法工作流） -->
+  <section class="view" id="view-solver">
+    <div class="card" style="margin-bottom:10px">
+      <div class="card-h"><h2>识题 · 找同解法</h2><span class="sub">DeepSeek 提知识点 · 本地神经网络配母题 · <span id="libCount">0</span> 个母题参与</span></div>
+      <div class="card-b" style="display:grid;gap:9px">
+        <div class="actbar" id="recModeBar">
+          <button class="btn sm" data-mode="hybrid">共同参与</button>
+          <button class="btn sm" data-mode="ai">AI识别</button>
+          <button class="btn sm" data-mode="offline">离线识别</button>
+        </div>
+        <p class="hint" id="recModeHint" style="margin-top:-4px"></p>
+        <div class="field" style="margin-top:4px"><select id="catalogStrategySel"><option value="off">目录关闭（最省，精选仅基础候选）</option><option value="ondemand">按需目录（推荐：判不中时注入对应章节+本地相关）</option><option value="full">全量目录（每次都带，最准最省调用）</option></select></div>
+        <label class="ck" style="border:none;padding:4px 0"><input type="checkbox" id="catalogToggle" style="width:18px;height:18px;accent-color:var(--pri)"><span style="font-size:13px">母题目录进提示词（判得更准·目录命中缓存后很便宜；新增母题自动追加末尾，删除/改名会重建缓存）</span></label>
+        <div class="field" style="margin-top:4px"><select id="catalogSubjectSel"></select></div>
+        <div class="field"><input id="qnos" type="text" placeholder="题号：1-12、15、18-20"></div>
+        <div class="actbar">
+          <button class="btn pri" id="btnMakeRows">生成题号</button>
+          <button class="btn" id="btnPickPaper">上传试卷文件</button>
+          <button class="btn dgr" id="btnDropPaper">删除导入试卷</button>
+          <input id="paperFile" type="file" accept=".md,.markdown,.txt,.text" style="display:none">
+        </div>
+        <details style="border:1px solid var(--line);border-radius:11px;padding:8px 11px;background:#f8fafd">
+          <summary style="font-size:13px;color:var(--ink2);cursor:pointer">或粘贴整份试卷文本自动切题</summary>
+          <div class="field" style="margin-top:9px"><textarea id="paperText" style="min-height:104px" placeholder="粘贴试卷（Markdown / 纯文本），自动按 1. 2. 3. 或 第N题 切分题号"></textarea></div>
+          <div class="actbar" style="margin-top:9px">
+            <button class="btn sm" id="btnParsePaper">解析试卷题号</button>
+            <button class="btn sm ghost" id="btnClearRows">清空全部行</button>
+            <label class="ck" style="border:none;padding:0 4px"><input type="checkbox" id="splitSub" checked style="width:16px;height:16px;accent-color:var(--pri)"><span style="font-size:12px">大题拆小题</span></label>
+          </div>
+        </details>
+        <details style="border:1px solid var(--line);border-radius:11px;padding:8px 11px;background:#f8fafd;margin-top:9px">
+          <summary style="font-size:13px;color:var(--ink2);cursor:pointer">图片与压缩包工具（ZIP导入 / 图片转代码 / 压缩）</summary>
+          <div class="actbar" style="margin-top:9px">
+            <button class="btn sm pri" id="btnPickZip">上传 ZIP（md/json＋图片）</button>
+            <input id="zipFile" type="file" accept=".zip,application/zip" style="display:none">
+            <label class="ck" style="border:none;padding:0 4px"><input type="checkbox" id="zipCompress" checked style="width:16px;height:16px;accent-color:var(--pri)"><span style="font-size:12px">导入时压缩图片</span></label>
+            <span class="hint" id="zipStat"></span>
+          </div>
+          <p class="hint">把 md 试卷（或母题 json）和它引用的图片一起打成 zip，md 里写相对路径如 ![图](images/1.png)，导入后自动内嵌显示，无需手动转 base64。</p>
+          <div class="actbar" style="margin-top:6px">
+            <input id="imgToolFile" type="file" accept="image/*" multiple style="font-size:12px;max-width:170px">
+            <select id="imgToolFmt" style="font-size:12px"><option value="image/jpeg">JPEG小</option><option value="image/png">PNG无损</option></select>
+            <input id="imgToolWidth" type="number" value="800" min="200" max="2000" style="width:64px;font-size:12px">
+            <button class="btn sm" id="btnImgTool">生成图片代码</button>
+          </div>
+          <div class="field" style="margin-top:6px"><textarea id="imgToolOut" readonly style="min-height:56px;font-size:11px" placeholder="生成的 ![图](data:…) 代码"></textarea></div>
+          <div class="actbar" style="margin-top:6px">
+            <button class="btn sm" id="btnImgToolCopy">复制代码</button>
+            <button class="btn sm" id="btnImgToolInsert">追加到试卷文本</button>
+            <button class="btn sm" id="btnCompressPaper">压缩试卷文本中的图片</button>
+            <span class="hint" id="compressStat"></span>
+          </div>
+        </details>
+        <p class="hint">省 token 漏斗：学过的题缓存直出（0 token）→ 本地网络有把握直接判（0 token）→ 才请 DeepSeek 审题提知识点（不带母题目录），再由本地网络映射母题。映射不对点「改判」，教一次下次就会。题干可在每行展开编辑。</p>
+      </div>
+    </div>
+
+    <div class="summary" id="matchSummary" style="margin-bottom:10px">
+      <div class="stat" data-filter="all"><b id="smTotal">0</b><span>总题数</span></div>
+      <div class="stat" data-filter="done"><b id="smDone">0</b><span>已识别</span></div>
+      <div class="stat" data-filter="hit"><b id="smHit">0</b><span>命中母题</span></div>
+      <div class="stat" data-filter="pick"><b id="smPick">0</b><span>待确认</span></div>
+    </div>
+
+    <div class="card" style="margin-bottom:10px">
+      <div class="card-b" style="display:grid;gap:8px">
+        <div class="actbar">
+          <button class="btn green" id="btnMatch">开始匹配</button>
+          <button class="btn" id="btnEstimate">预估整卷花费</button>
+          <button class="btn" id="btnExpandAll">展开全部题干</button>
+          <button class="btn" id="btnDelUnmatched">一键删除未匹配</button>
+          <button class="btn" id="btnExportResult">导出结果</button>
+          <button class="btn" id="btnExportResultZip">打包ZIP</button>
+          <button class="btn pri" id="btnSavePaper">💾 存入试卷库</button>
+        </div>
+        <p class="hint" id="batchEstimate">上传试卷或生成题号后，点「预估整卷花费」先算钱再匹配。</p>
+      </div>
+    </div>
+
+    <div id="matchProgress" style="display:none;margin-bottom:10px">
+      <div class="mprog"><i id="mprogBar" style="width:0%"></i></div>
+      <p class="hint" id="mprogText" style="margin:4px 0 0"></p>
+    </div>
+    <p class="hint" style="margin:0 0 6px">分割有误可人工修正：点题号/题型直接改，⤴并入上题（多拆了）、✂拆分（少拆了）。</p>
+    <div class="rows" id="rows"></div>
+
+    <div class="card" style="margin-top:10px">
+      <div class="card-h"><h2>结果输出</h2><span class="sub">题号 + 知识点 + 母题 + 大招</span></div>
+      <div class="card-b" style="display:grid;gap:9px">
+        <div class="field" style="flex:0 0 auto"><select id="resultMode"><option value="brief">只输出题号 + 母题结果</option><option value="full">包含题目原文</option></select></div>
+        <textarea id="resultMd" class="out" placeholder="点「导出结果」在这里生成 Markdown，可复制或下载"></textarea>
+        <div class="actbar">
+          <button class="btn sm" id="btnCopyResult">复制</button>
+          <button class="btn sm" id="btnDownloadResult">下载 .md</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 试卷库 -->
+  <section class="view" id="view-papers">
+    <div class="card" style="margin-bottom:10px">
+      <div class="card-h"><h2>试卷仓库</h2><span class="sub" id="papersCount">0 份</span></div>
+      <div class="card-b">
+        <div class="searchrow"><div class="field"><input id="paperSearch" type="search" placeholder="搜试卷名 / 题目 / 母题关键词"></div><button class="btn" id="btnImportPaper">导入</button></div>
+        <input id="paperLibFile" type="file" accept=".json,application/json" style="display:none">
+        <div class="papers-grid" id="papersList" style="margin-top:10px"></div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:10px">
+      <div class="card-h cp-fold-h" id="cpFoldH"><span class="arrow">›</span>&nbsp;<h2 style="display:inline">组卷</h2><span class="sub">按知识点/题型/难度 · 从仓库选真题</span></div>
+      <div class="card-b" id="cpBody" style="display:none">
+        <div class="field"><select id="cpSubject"></select></div>
+        <div class="field"><select id="cpChapter"></select></div>
+        <div class="actbar"><button class="btn sm" id="cpSelAll">全选当前</button><button class="btn sm" id="cpSelNone">清空勾选</button><span class="sub" id="cpCheckedCount">已勾0</span></div>
+        <div id="cpMotifList" style="max-height:220px;overflow:auto"></div>
+        <p class="hint">勾选母题＝只组匹配这些母题的真题（不勾＝不限）；母题后标注可组题数。</p>
+        <div class="lab">题型（可多选，不选＝不限）</div>
+        <div class="cp-chips" id="cpSecChips"></div>
+        <div class="lab">难度（可多选，不选＝不限）</div>
+        <div class="cp-chips" id="cpDiffChips"></div>
+        <div class="field"><select id="cpSource"></select></div>
+        <div class="field"><input id="cpCount" type="number" value="10" min="1" max="100"></div>
+        <div class="actbar"><button class="btn pri" id="btnCompose">生成组卷</button></div>
+        <p class="hint">题目全部来自仓库已识别真题，自带母题关联与解法，0 token。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 我的 -->
+  <section class="view" id="view-me">
+    <div class="card">
+      <div class="card-h"><h2>题库与数据</h2><span class="sub">仅保存在本机</span></div>
+      <div class="mebar"><b>版本</b><span class="sp"></span><span>v2.15.0（2026-11-19）</span></div>
+      <div class="mebar"><b>当前题库</b><span class="sp"></span><span id="meTypes">0</span></div>
+      <div class="mebar"><b>学习样本</b><span class="sp"></span><span id="meSamples">0</span></div>
+      <div class="mebar"><b>已学组合</b><span class="sp"></span><span id="meCombo">0</span></div>
+      <div class="mebar"><b>本地命中（0 token）</b><span class="sp"></span><span id="meLocal">0</span></div>
+      <div class="mebar"><b>缓存命中（0 token）</b><span class="sp"></span><span id="meCache">0</span></div>
+      <div class="mebar"><b>DeepSeek 调用</b><span class="sp"></span><span id="meApi">0</span></div>
+      <div class="mebar"><b>累计消耗 token</b><span class="sp"></span><span id="meTokens">0</span></div>
+      <div class="mebar"><b>估算已省 token</b><span class="sp"></span><span id="meSaved">0</span></div>
+      <div class="mebar"><b>累计花费估算</b><span class="sp"></span><span id="meCost">¥0</span></div>
+      <div class="mebar"><b>估算已省金额</b><span class="sp"></span><span id="meSavedMoney">¥0</span></div>
+      <div class="mebar"><b>服务端缓存命中率</b><span class="sp"></span><span id="meSrvHit">—</span></div>
+      <div class="card-b actbar" style="border-top:1px solid var(--line2)">
+        <button class="btn pri" id="btnExportLib">导出题库 JSON</button>
+        <button class="btn" id="btnExportLibZip">打包ZIP（含图）</button>
+        <button class="btn" id="btnImportLib">导入题库 JSON</button>
+        <button class="btn green" id="btnExportLearn">导出学习数据</button>
+        <button class="btn" id="btnImportLearn">导入学习数据</button>
+        <button class="btn" id="btnExportAll">全量备份</button>
+        <button class="btn" id="btnImportAll">导入全量备份</button>
+        <button class="btn dgr" id="btnResetLearn">清空学习数据</button>
+        <button class="btn dgr" id="btnClearMotifs">全部删除母题</button>
+      </div>
+      <input id="libFile" type="file" accept=".json,application/json" style="display:none">
+      <input id="learnFile" type="file" accept=".json,application/json" style="display:none">
+      <input id="allFile" type="file" accept=".json,application/json" style="display:none">
+    </div>
+    <div class="card" style="margin-top:10px">
+      <div class="card-h"><h2>DeepSeek 设置</h2><span class="sub">Key 只存本机</span></div>
+      <div class="card-b" style="display:grid;gap:9px">
+        <div><label class="lab">API Key</label><div class="field"><input id="apiKey" type="password" placeholder="sk-..." autocomplete="off"></div></div>
+        <div><label class="lab">模型</label><div class="field"><select id="model"><option value="deepseek-chat">deepseek-chat（推荐，快且省）</option><option value="deepseek-flash">deepseek-flash（V4.1-Flash）</option><option value="deepseek-v4-pro">deepseek-v4-pro（更强，更贵）</option></select></div></div>
+        <div><label class="lab">本地置信阈值：<span id="thVal">0.85</span></label><input id="threshold" type="range" min="0.5" max="0.99" step="0.01" value="0.85" style="width:100%"></div>
+        <p class="hint">阈值越高越谨慎（更多题交给 DeepSeek＋人工确认），越低越省 token。建议 0.85。</p>
+        <label class="ck" style="border:none;padding:4px 0"><input type="checkbox" id="autoSolution" style="width:18px;height:18px;accent-color:var(--pri)"><span style="font-size:13px">识别命中后自动在右侧展示解法（0 token）</span></label>
+          <label class="ck" style="border:none;padding:4px 0"><input type="checkbox" id="deepThinking" style="width:18px;height:18px;accent-color:var(--pri)"><span style="font-size:13px">深度思考（更准但更慢更贵，识题建议关闭）</span></label>
+          <label class="ck" style="border:none;padding:4px 0"><input type="checkbox" id="autoTrain" style="width:18px;height:18px;accent-color:var(--pri)"><span style="font-size:13px">本地训练（关闭=不训练/不准备语料/不加载权重，缓存与AI识别照常）</span></label>
+          <label class="ck" style="border:none;padding:4px 0"><input type="checkbox" id="batchSingles" style="width:18px;height:18px;accent-color:var(--pri)"><span style="font-size:13px">单选题打包（省token；若待确认偏多可关闭逐题对比）</span></label>
+        <div><label class="lab">当前计费时段（自动）</label><div class="hint" id="spanPeak">—</div></div>
+        <div class="form-grid">
+          <div><label class="lab">输入价（元/百万token·高峰·缓存未命中）</label><div class="field"><input id="priceIn" type="number" step="0.01" value="2"></div></div>
+          <div><label class="lab">输出价（元/百万token·高峰）</label><div class="field"><input id="priceOut" type="number" step="0.01" value="8"></div></div>
+          <div><label class="lab">输入价（缓存命中·高峰）</label><div class="field"><input id="priceHit" type="number" step="0.01" value="0.04"></div></div>
+        </div>
+        <p class="hint">官方峰谷计价：工作日 9-12、14-18 点高峰，其余时段及周末空闲自动半价。默认 deepseek-flash 高峰价（输入2/输出8），v4-pro 为 9/27。花费为离线估算，以官方账单为准。</p>
+        <div class="actbar"><button class="btn sm" id="btnFillPrice">按所选模型填入官方价</button></div>
+        <div class="actbar"><button class="btn pri" id="btnSaveSet">保存设置</button><button class="btn" id="btnTestKey">测试连接</button><button class="btn" id="btnOpenPrompt">查看 / 编辑搭桥提示词</button></div>
+        <p class="hint" id="testKeyOut" style="margin-top:6px"></p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:10px">
+      <div class="card-b"><p class="hint">识别不准时的自救：① 点「改选母题」勾选正确答案（组合题多选），本地网络立即学会这类知识点→母题的映射，不花 token；② 新母题走「录入 → JSON 导入」，直接把母题 JSON 文件喂进来；③ 换手机前「导出学习数据」＋「导出题库 JSON」，新设备导入即恢复全部学习成果。</p></div>
+    </div>
+    <div class="card" id="trialCard" style="margin-top:10px">
+      <div class="card-h cp-fold-h" id="trialFoldH"><span class="arrow">›</span>&nbsp;<h2 style="display:inline">试用与激活</h2><span class="sub" id="trialFoldSub"></span></div>
+      <div class="card-b" id="trialCardBody" style="display:none">
+        <div class="mebar"><b>授权状态</b><span class="sp"></span><span id="meTrialLeft">试用中</span></div>
+        <div class="mebar"><b>本机设备码</b><span class="sp"></span><span id="meDevId">-</span></div>
+        <div class="actbar" style="margin-top:8px"><div class="field" style="flex:1 1 160px"><input id="meActCode" placeholder="输入激活码"></div><button class="btn sm pri" id="btnMeAct">激活正式版</button></div>
+        <p class="hint" id="meActMsg">试用到期后需激活才能继续使用；把设备码发给作者获取激活码。激活码与本机绑定，卸载重装后输入原码即可恢复。</p>
+        <p class="hint" style="margin-top:10px"><b>联系作者获取最新激活码</b></p>
+        <div class="qrbox"><img id="meQr" alt="作者微信二维码" src="data:image/png;base64,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"><div class="qrtip"><p class="hint"><b>微信扫码添加作者</b></p><button class="btn sm" id="btnMeQrSave">保存二维码到相册</button><p class="hint">保存后：微信→扫一扫→右上角相册→选此图</p></div></div>
+        <div class="mebar"><b>QQ</b><span class="sp"></span><span id="meQq"></span><button class="btn sm" id="btnCopyQq" style="margin-left:8px">复制</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<nav class="tabbar">
+  <button class="navi on" data-view="bank">
+    <span class="nvi"><svg viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H14v16h4.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg></span>题库
+  </button>
+  <button class="navi" data-view="solver">
+    <span class="nvi"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.2"/><path d="M15.6 15.6 20 20"/></svg></span>识题
+  </button>
+  <button class="navi" data-view="papers">
+    <span class="nvi"><svg viewBox="0 0 24 24"><path d="M6 3.5h9l4 4V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z"/><path d="M14.5 3.5V8h4.5M8.5 12h7M8.5 15.5h7"/></svg></span>试卷
+  </button>
+  <button class="navi plus" id="btnIntakeTab">
+    <span class="nvi"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>录入
+  </button>
+  <button class="navi" data-view="me">
+    <span class="nvi"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.8 20c.6-3.6 3.5-5.6 7.2-5.6s6.6 2 7.2 5.6"/></svg></span>我的
+  </button>
+</nav>
+
+<!-- 录入弹窗 -->
+<div class="mask" id="intakeMask">
+  <div class="modal" role="dialog" aria-label="录入母题">
+    <div class="modal-h">
+      <h2 id="intakeTitle">录入母题</h2><div class="spacer"></div>
+      <button class="btn ghost" id="btnCloseIntake">✕ 关闭</button>
+    </div>
+    <div class="modal-b">
+      <div class="sub-tabs" id="intakeTabs">
+        <button class="sub-tab on" data-pane="json">JSON 导入</button>
+        <button class="sub-tab" data-pane="form">手动填写</button>
+        <button class="sub-tab" data-pane="prompt">搭桥提示词</button>
+        <button class="sub-tab" data-pane="syn">同义词库</button>
+      </div>
+
+      <div class="pane on" data-pane="json">
+        <div class="notice" style="margin-bottom:12px">
+          直接导入母题 <b>JSON 文件</b>（数组，每条含 name / triggers / rules / sampleQuestion / solution / moveName / move 等字段，与你的母题库 JSON 结构一致）。同名母题自动跳过，导入后本地网络立即学习新母题。
+        </div>
+        <div class="drop" id="jsonDrop">
+          <div>选择母题 JSON 文件，或粘贴到下方</div>
+          <div><button class="btn sm" id="btnPickJson">选择 .json 文件</button></div>
+          <div style="margin-top:6px"><button class="btn sm" id="btnPickJsonZip">或选择 ZIP（json＋图片，自动内嵌）</button><input id="jsonZipFile" type="file" accept=".zip,application/zip" style="display:none"></div>
+          <input id="jsonFile" type="file" accept=".json,application/json" style="display:none">
+        </div>
+        <div class="field" style="margin-top:12px"><textarea id="jsonText" style="min-height:150px;font-family:var(--mono);font-size:12px" placeholder='[{"name":"...","triggers":["..."],"rules":["..."],"sampleQuestion":"..."}]'></textarea></div>
+        <label class="ck" style="border:none;padding:4px 0"><input type="checkbox" id="jsonOverwrite" style="width:18px;height:18px;accent-color:var(--pri)"><span style="font-size:13px">覆盖同名母题（更新为导入版本，保留已学会的判定记录）</span></label>
+        <div class="actbar" style="margin:12px 0">
+          <button class="btn pri" id="btnParseJson">解析并预览</button>
+          <button class="btn" id="btnClearJson">清空</button>
+          <button class="btn" id="btnCopyCourseware">复制「课件转母题」提示词</button>
+          <span class="hint" id="jsonStat" style="align-self:center"></span>
+        </div>
+        <div id="jsonCandWrap"></div>
+        <div class="actbar" style="margin-top:10px"><button class="btn green" id="btnSaveJsonCands" style="display:none">入库所选</button></div>
+      </div>
+
+      <div class="pane" data-pane="form">
+        <div class="notice" style="margin-bottom:12px">一条母题 = 一个原子模型（一个大招）。综合题靠识题时多选母题叠加覆盖。</div>
+        <div class="form-grid">
+          <div><label class="lab">题型名称 *</label><div class="field"><input id="fName" placeholder="如：函数周期性求值"></div></div>
+          <div><label class="lab">学科</label><div class="field"><input id="fSubject" placeholder="数学"></div></div>
+          <div><label class="lab">章节 / 讲次</label><div class="field"><input id="fChapter" placeholder="如：第5讲 函数周期性"></div></div>
+          <div><label class="lab">难度</label><div class="field"><select id="fDiff"><option>简单</option><option selected>中档</option><option>较难</option></select></div></div>
+        </div>
+        <div style="margin-top:11px"><label class="lab">例题 *</label><div class="field"><textarea id="fSample" style="min-height:64px" placeholder="已知$f(x)$周期为3，$f(1)=2$，求$f(2026)$"></textarea></div></div>
+        <div style="margin-top:11px"><label class="lab">识别特征（逗号分隔）*</label><div class="field"><input id="fTrig" placeholder="周期, f(x+T)=f(x), 求远处函数值"></div></div>
+        <div style="margin-top:11px"><label class="lab">识别判据（逗号分隔）*</label><div class="field"><input id="fRules" placeholder="已知周期求远处函数值"></div></div>
+        <div style="margin-top:11px"><label class="lab">解法步骤（一行一步）</label><div class="field"><textarea id="fSol" style="min-height:64px"></textarea></div></div>
+        <div class="form-grid" style="margin-top:11px">
+          <div><label class="lab">大招名称</label><div class="field"><input id="fMoveName" placeholder="无"></div></div>
+          <div><label class="lab">来源</label><div class="field"><input id="fSource" placeholder="课件 / 自整理"></div></div>
+        </div>
+        <div style="margin-top:11px"><label class="lab">大招内容（口诀＋用法）</label><div class="field"><textarea id="fMove" style="min-height:56px"></textarea></div></div>
+        <div style="margin-top:11px"><label class="lab">关键点（一行一条）</label><div class="field"><textarea id="fKey" style="min-height:56px"></textarea></div></div>
+        <div style="margin-top:11px"><label class="lab">易错点（一行一条）</label><div class="field"><textarea id="fCaveat" style="min-height:56px"></textarea></div></div>
+        <div style="margin-top:11px"><label class="lab">高频公式（一行一条，无大招时必填基础公式）</label><div class="field"><textarea id="fFormula" style="min-height:56px"></textarea></div></div>
+        <div class="actbar" style="margin-top:12px"><button class="btn pri" id="btnSaveForm">存入题库</button></div>
+      </div>
+
+      <div class="pane" data-pane="syn">
+        <div class="notice g" style="margin-bottom:12px">内置高中<b>数学/物理/化学</b>同义学术名词库：识别时自动语义替换（如 △↔三角形、sin↔正弦、电压↔电势差）。一行一组同义词，组内用逗号分隔；保存后立即重新学习生效。可导出/导入迁移。</div>
+        <div class="field"><textarea id="synText" style="min-height:220px;font-family:var(--mono);font-size:12.5px"></textarea></div>
+        <div class="actbar" style="margin-top:12px">
+          <button class="btn pri" id="btnSynSave">保存并生效</button>
+          <button class="btn" id="btnSynExport">导出</button>
+          <button class="btn" id="btnSynImport">导入</button>
+          <button class="btn ghost" id="btnSynReset">恢复内置</button>
+        </div>
+        <input id="synFile" type="file" accept=".json,application/json" style="display:none">
+        <p class="hint" id="synCount" style="margin-top:8px"></p>
+      </div>
+
+      <div class="pane" data-pane="prompt">
+        <div class="notice g" style="margin-bottom:12px">
+          <b>搭桥逻辑</b>：DeepSeek 只负责读题 → 输出<b>知识点短语</b>（提示词里<b>不带母题目录</b>，题目多长都只花这一小段 token）；知识点 → 母题的映射由<b>本地神经网络</b>完成，跟着你的每次确认/纠正学习，越用越准、越用越省。
+        </div>
+        <label class="lab">当前搭桥提示词（可编辑，保存后生效）</label>
+        <div class="field"><textarea id="bridgeText" style="min-height:180px;font-family:var(--mono);font-size:12.5px"></textarea></div>
+        <div class="actbar" style="margin-top:12px">
+          <button class="btn pri" id="btnSavePrompt">保存提示词</button>
+          <button class="btn" id="btnCopyPrompt">复制</button>
+          <button class="btn ghost" id="btnResetPrompt">恢复默认</button>
+        </div>
+        <p class="hint" style="margin-top:8px">当前提示词离线 token 数：<b id="bridgeTokCount">0</b>（DeepSeek 官方分词器本地计算，不联网）</p>
+        <label class="lab" style="margin-top:10px">离线 token 计算器（粘贴任意文本）</label>
+        <div class="field"><textarea id="tkCalc" style="min-height:70px" placeholder="粘贴题目或任意文本，本地算出 DeepSeek token 数"></textarea></div>
+        <div class="actbar" style="margin-top:8px"><button class="btn sm" id="btnTkCalc">计算 token</button><span class="hint" id="tkCalcOut" style="align-self:center"></span></div>
+        <p class="hint" style="margin-top:8px">输出格式必须保持 {"k":["知识点",...]}，否则解析会失败。提示词已覆盖数学/物理/化学等多学科。此为「共同参与」模式的特征提示词；「AI识别」模式用内置题型直判提示词（同样多学科）。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 改选母题 -->
+<div class="mask" id="pickMask">
+  <div class="modal" role="dialog" aria-label="改选母题">
+    <div class="modal-h"><h2>选择正确的母题（组合题可多选）</h2><div class="spacer"></div><button class="btn ghost" id="btnPickCancel">✕ 关闭</button></div>
+    <div class="modal-b"><div id="pickList" style="display:grid;gap:6px"></div></div>
+    <div class="modal-f"><div class="spacer"></div><button class="btn green" id="btnPickOk">确认并学习</button></div>
+  </div>
+</div>
+
+<!-- 导出面板 -->
+<div class="mask" id="exMask">
+  <div class="modal" role="dialog" aria-label="导出内容">
+    <div class="modal-h"><h2 id="exTitle">导出</h2><div class="spacer"></div><button class="btn ghost" id="exClose">✕ 关闭</button></div>
+    <div class="modal-b">
+      <div class="actbar" style="margin-bottom:10px">
+        <button class="btn pri" id="exCopy">复制全部内容</button>
+        <button class="btn pri" id="exDownload">保存为文件</button>
+        <button class="btn ghost" id="exSelect">全选文本</button>
+      </div>
+      <div class="field"><textarea id="exText" style="min-height:260px;font-family:var(--mono);font-size:12px;line-height:1.55" readonly></textarea></div>
+      <p class="hint" style="margin-top:8px">复制后粘到「备忘录 / 文件传输助手 / 文本编辑器」另存为 .json 文件，即可在别的设备用对应「导入」按钮恢复。</p>
+    </div>
+  </div>
+</div>
+
+<div class="detail-overlay" id="detailOverlay">
+  <div class="ov-back"><button class="btn sm" id="btnBack">‹ 返回列表</button><b id="backTitle" style="font-size:13.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">解法详情</b></div>
+  <div id="detail" style="max-width:760px;margin:0 auto;background:var(--card);min-height:calc(100% - 50px)"></div>
+</div>
+
+<div class="sol-backdrop" id="solBackdrop"></div>
+<div class="sol-panel" id="solPanel">
+  <div class="sol-h"><b id="solTitle">解法</b><button class="btn sm ghost" id="solClose">✕ 关闭</button></div>
+  <div class="sol-body" id="solBody"></div>
+  <div class="sol-foot">
+    <button class="btn sm" id="btnSolAi">AI详解本题（耗token）</button>
+    <div id="solAiOut" style="margin-top:8px"></div>
+    <p class="hint" style="margin-top:6px">上方解法来自本地母题库，0 token；点「AI详解」才会联网针对本题生成定制解答。</p>
+  </div>
+</div>
+
+<div class="mask" id="paperMask"><div class="modal" role="dialog" aria-label="试卷详情">
+  <div class="modal-h"><h2 id="paperTitle">试卷</h2><div class="spacer"></div><button class="btn ghost" id="paperClose">✕ 关闭</button></div>
+  <div class="modal-b" id="paperBody"></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+
+<script src="js/katex.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
